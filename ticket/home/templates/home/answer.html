@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+     {% if request.user.is_authenticated%}
+            <form action="" method="post">
+                 {% csrf_token %}
+                 {{ form.as_p }}
+                 <input type="submit" value="send">
+            </form><br/>
+    {% else %}
+        <p class="alert alert-danger"> only login user can send messages</p>
+    {% endif %}
+{% endblock %}

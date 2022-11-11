@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+             {% if user.is_superuser %}
+                    <a href="{%url 'home:chat' ticket.id %}" class=" btn btn-primary col-md-2">close chat</a>
+                     <a href="{%url 'home:answer' ticket.id%}" class=" btn btn-primary" >Answer</a><br/>
+
+            {% else %}
+                 <a href="{%url 'home:answer' ticket.id%}" class="{% if close %} disabled{% endif %} btn btn-primary" >Answer</a><br/>
+
+            {% endif %}
+        <p>{{ ticket.user }}</p>
+        <p>{{ ticket.title}}-{{ ticket.created }}</p>
+        <p>{{ ticket.body }}</p><br/>
+
+        <p>{{ Ticket_answer.count }} answer</p>
+        {% for answer in Ticket_answer  %}
+                <div class="card text-bg-info mb-3" style="max-width: 18rem;">
+                <div class="card-header">{{ answer.user }}| {{ answer.created|timesince }}</div>
+                <div class="card-body">
+                     <p class="card-text">{{ answer.body }}</p>
+                </div>
+                </div>
+        {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <a href="{%url 'home:messages'%}" class="btn btn-primary" >new message</a><br/>
+
+    <div class="card">
+        {% for ticket in uticket %}
+            <a href="{% url 'home:chat' ticket.id %}" class="card-body" > {{ ticket.user }} - {{ ticket.title}}</a><br/>
+        {% endfor %}
+    </div>
+{% endblock %}
